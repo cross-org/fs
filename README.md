@@ -2,7 +2,7 @@
 
 **This is deprecated**
 
-We started working on this library just to realise that there is already a fs
+We started working on this library just to realise that there is already an fs
 module supporting all runtimes, built into all runtimes - `node:fs/promises`.
 
 If you want to work with paths, there is `@std/path`.
