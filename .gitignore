@@ -130,3 +130,8 @@ dist
 .pnp.*
 # Deno / JSR
 deno.lock
+
+# NPM
+.npmrc
+package-lock.json
+package.json

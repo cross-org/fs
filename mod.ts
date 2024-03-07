@@ -1,1 +1,1 @@
-export { access } from "./access/mod.ts";
+export { stat } from "./stat/mod.ts";

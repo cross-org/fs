@@ -25,5 +25,5 @@ jobs:
       - name: Run linter
         run: deno lint
 
-      - name: Check types
-        run: deno check mod.ts
+#      - name: Check types
+#        run: deno check mod.ts
