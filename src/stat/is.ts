@@ -1,6 +1,6 @@
 import { NotFoundError, stat } from "./mod.ts";
 
-export async function isDir(path: string) {
+export async function isDir(path: string): Promise<boolean> {
   try {
     const result = await stat(path);
     return result.isDirectory;
@@ -12,7 +12,7 @@ export async function isDir(path: string) {
     }
   }
 }
-export async function isFile(path: string) {
+export async function isFile(path: string): Promise<boolean> {
   try {
     const result = await stat(path);
     return result.isFile;
@@ -24,7 +24,7 @@ export async function isFile(path: string) {
     }
   }
 }
-export async function isSymlink(path: string) {
+export async function isSymlink(path: string): Promise<boolean> {
   try {
     const result = await stat(path);
     return result.isSymlink;
