@@ -3,9 +3,9 @@
   "version": "0.0.3",
   "exports": {
     ".": "./mod.ts",
-    "./stat": "./stat/mod.ts",
-    "./io": "./io/mod.ts",
-    "./ops": "./ops/mod.ts"
+    "./stat": "./src/stat/mod.ts",
+    "./io": "./src/io/mod.ts",
+    "./ops": "./src/ops/mod.ts"
   },
   "imports": {
     "@cross/runtime": "jsr:@cross/runtime@^1.0.0",
