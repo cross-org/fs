@@ -1,38 +1,51 @@
 # @cross/fs
 
-**This is deprecated**
+**Work in progress** Cross Runtime filesystem operations for JavaScript and
+TypeScript.
 
-We started working on this library just to realise that there is already an fs
-module supporting all runtimes, built into all runtimes - `node:fs/promises`.
+Available for Node, Deno Bun and Browser at
+[jsr.io/@cross/fs](https://jsr.io/@cross/fs), works seamlessly with both
+JavaScript and TypeScript.
 
-If you want to work with paths, there is `@std/path`.
+For cross rutime path operations, [jsr.io/@std/path](https://jsr.io/@std/path)
+will cover most scenarios, this library focuses on the file system operations.
 
-Here's how to use it, using stat as an example:
+## Coverage
 
-```js
-import { stat } from "node:fs/promises";
+| Method | Deno | Node | Bun | Browser (LocalStorage) |
+| ------ | ---- | ---- | --- | ---------------------- |
+| stat   | X    | X    | X   |                        |
+| ...    |      |      |     |                        |
 
-const stats = await stat("mod.ts");
+## Contribution guide
 
-console.log(stats);
-```
-
-Run using
-
-## Deno:
-
-```bash
-deno run --allow-read demo.ts
-```
-
-## Node:
+## Deno
 
 ```bash
-npx tsx demo.ts
+# Run an example using Deno
+deno run -A examples/stat.ts
 ```
 
-## Bun:
+## Bun
 
 ```bash
-bun run demo.ts
+# Install deps locally
+bun jsr add @cross/runtime
 ```
+
+```bash
+# Run an example using Bun
+bun run examples/stat.ts
+```
+
+## Node
+
+````bash
+# Install deps locally
+npx jsr add @cross/runtime
+``
+
+```bash
+# Run an example using tsx in Node
+npx tsx examples/stat.ts
+````
