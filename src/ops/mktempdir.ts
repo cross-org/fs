@@ -1,5 +1,5 @@
 import { dir } from "@cross/dir";
-import { generate } from "@std/uuid/v1";
+import { ulid } from "@std/ulid";
 import { join } from "@std/path";
 import { mkdir } from "./mkdir.ts";
 
@@ -12,7 +12,7 @@ import { mkdir } from "./mkdir.ts";
  */
 export async function mktempdir(prefix?: string): Promise<string> {
   const tempBaseDir = await dir("tmp");
-  let uuid = generate();
+  let uuid = ulid();
   if (prefix) {
     uuid = `${prefix}-${uuid}`;
   }

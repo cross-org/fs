@@ -59,9 +59,9 @@ console.log(await mktempdir("my-prefix"));
 // -> /tmp/my-prefix-7a8s78-as67d6as6-asd67a6sd-asdyda/
 ```
 
-| Method     | Deno | Node | Bun | Browser (LocalStorage) |
-| ---------- | ---- | ---- | --- | ---------------------- |
-| unlink     | X    | X    | X   |                        |
-| mkdir      | X    | X    | X   |                        |
-| mktempdir  | X    | X    | X   |                        |
-| rmdir      | X    | X    | X   |                        |
+| Method    | Deno | Node | Bun | Browser (LocalStorage) |
+| --------- | ---- | ---- | --- | ---------------------- |
+| unlink    | X    | X    | X   |                        |
+| mkdir     | X    | X    | X   |                        |
+| mktempdir | X    | X    | X   |                        |
+| rmdir     | X    | X    | X   |                        |
