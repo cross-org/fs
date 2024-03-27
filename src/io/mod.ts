@@ -1,2 +1,1 @@
-export * from "./read.ts";
-export * from "./write.ts";
+export { readFile, writeFile } from "node:fs/promises";

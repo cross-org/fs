@@ -171,5 +171,6 @@ function mapDenoStats(stats: Deno.FileInfo): StatResult {
 }
 
 export { statWrap as stat };
+export { lstat } from "node:fs/promises";
 export * from "./is.ts";
 export * from "./exists.ts";
