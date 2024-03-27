@@ -23,4 +23,7 @@ will cover most scenarios, this library focuses on the file system operations.
 | io     | writeFile  | X    | X    | X   |                        |
 | ------ | ---------- | ---- | ---- | --- | ---------------------- |
 | ops    | unlink     | X    | X    | X   |                        |
+| ops    | mkdir      | X    | X    | X   |                        |
+| ops    | mktempdir  | X    | X    | X   |                        |
+| ops    | rmdir      | X    | X    | X   |                        |
 | ------ | ---------- | ---- | ---- | --- | ---------------------- |
