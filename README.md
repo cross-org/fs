@@ -12,10 +12,14 @@ will cover most scenarios, this library focuses on the file system operations.
 
 ## Coverage
 
-| Method | Deno | Node | Bun | Browser (LocalStorage) |
-| ------ | ---- | ---- | --- | ---------------------- |
-| stat   | X    | X    | X   |                        |
-| ...    |      |      |     |                        |
+| Method    | Deno | Node | Bun | Browser (LocalStorage) |
+| --------- | ---- | ---- | --- | ---------------------- |
+| stat      | X    | X    | X   |                        |
+| exists    | X    | X    | X   |                        |
+| isDir     | X    | X    | X   |                        |
+| isFile    | X    | X    | X   |                        |
+| isSymlink | X    | X    | X   |                        |
+| ...       |      |      |     |                        |
 
 ## Contribution guide
 

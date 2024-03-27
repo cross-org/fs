@@ -1,11 +1,11 @@
 import { CurrentRuntime, Runtime } from "@cross/runtime";
 
-interface StatOptions {
+export interface StatOptions {
   /* Request bigInts, Only used with node */
   bigInt: false | undefined;
 }
 
-interface StatResult {
+export interface StatResult {
   /** Common Properties */
   isFile: boolean;
   isDirectory: boolean;
@@ -61,6 +61,13 @@ interface StatResult {
   isSocket: boolean | null;
 }
 
+export class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "NotFoundError";
+  }
+}
+
 async function statWrap(
   path: string,
   options?: StatOptions,
@@ -68,17 +75,35 @@ async function statWrap(
   switch (CurrentRuntime) {
     case Runtime.Node:
       /* Falls through */
-    // deno-lint-ignore no-case-declarations
     case Runtime.Bun:
-      const { stat } = await import("node:fs/promises");
-      return mapNodeStats(
-        await stat(path, options),
-        options?.bigInt === undefined ? true : false,
-      );
-
+      try {
+        //@ts-ignore Cross
+        const { stat } = await import("node:fs/promises");
+        return mapNodeStats(
+          //@ts-ignore Cross
+          await stat(path, options),
+          options?.bigInt === undefined ? true : false,
+        );
+      } catch (err) {
+        //@ts-ignore Cross
+        if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+          throw new NotFoundError(`File not found: ${path}`);
+        } else {
+          throw err;
+        }
+      }
     case Runtime.Deno:
-      return mapDenoStats(await Deno.stat(path));
-
+      try {
+        //@ts-ignore Cross
+        return mapDenoStats(await Deno.stat(path));
+      } catch (err) {
+        //@ts-ignore Cross
+        if (err instanceof Deno.errors.NotFound) {
+          throw new NotFoundError(`File not found: ${path}`);
+        } else {
+          throw err;
+        }
+      }
     case Runtime.Browser: // Add browser case for clarity
       throw new Error("File system access not supported in the browser");
 
