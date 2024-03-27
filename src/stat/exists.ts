@@ -1,4 +1,4 @@
-import { NotFoundError, stat } from "./stat.ts";
+import { NotFoundError, stat } from "./mod.ts";
 export async function exists(path: string): Promise<boolean> {
   try {
     await stat(path);

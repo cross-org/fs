@@ -18,4 +18,4 @@ jobs:
     uses: cross-org/workflows/.github/workflows/node-ci.yml@main
     with:
       jsr_dependencies: "@cross/test @std/assert @cross/runtime"
-      test_target: "src/*.test.ts"
+      test_target: "src/**/*.test.ts"

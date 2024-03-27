@@ -1,7 +1,12 @@
 {
   "name": "@cross/fs",
   "version": "0.0.3",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./mod.ts",
+    "./stat": "./stat/mod.ts",
+    "./io": "./io/mod.ts",
+    "./ops": "./ops/mod.ts"
+  },
   "imports": {
     "@cross/runtime": "jsr:@cross/runtime@^1.0.0",
     "@cross/test": "jsr:@cross/test@^0.0.9",

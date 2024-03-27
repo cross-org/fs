@@ -1,4 +1,5 @@
-import { NotFoundError, stat } from "./stat.ts";
+import { NotFoundError, stat } from "./mod.ts";
+
 export async function isDir(path: string) {
   try {
     const result = await stat(path);

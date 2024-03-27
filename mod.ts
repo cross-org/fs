@@ -1,2 +1,3 @@
-export { stat } from "./src/stat.ts";
-export { exists } from "./src/exists.ts";
+export * from "./src/stat/mod.ts";
+export * from "./src/io/mod.ts";
+export * from "./src/ops/mod.ts";
