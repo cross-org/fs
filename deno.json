@@ -1,8 +1,6 @@
 {
   "name": "@cross/fs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "exports": "./mod.ts",
-  "imports": {
-    "@cross/runtime": "jsr:@cross/runtime@^0.0.16"
-  }
+  "imports": { "@cross/runtime": "jsr:@cross/runtime@^1.0.0" }
 }
