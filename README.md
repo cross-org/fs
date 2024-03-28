@@ -21,7 +21,7 @@ will cover most scenarios, this library focuses on the file system operations.
 
 Example:
 
-```
+```ts
 import { exists, find } from "@cross/fs/stat";
 
 // Check if my/file exists
@@ -56,7 +56,7 @@ Methods:
 
 Example:
 
-```
+```ts
 import { readFile } from "@cross/fs/io";
 
 console.log(await readFile("my/file"));
@@ -73,8 +73,8 @@ console.log(await readFile("my/file"));
 
 Example:
 
-```
-import { mktempdir, dirpath } from "@cross/fs/ops";
+```ts
+import { dirpath, mktempdir } from "@cross/fs/ops";
 
 console.log(await mktempdir("my-prefix"));
 // -> /tmp/my-prefix-luaepc2x-74plp8j8tf7-gzaurxst88g
