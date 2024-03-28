@@ -4,6 +4,7 @@ export {
   cp,
   link,
   mkdir,
+  open,
   readdir,
   rename,
   rm,

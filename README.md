@@ -98,3 +98,4 @@ console.log(await dirpath("config"));
 | rename    | X    | X    | X   | node:fs/promises    |
 | watch     | X    | X    | X   | node:fs/promises    |
 | truncate  | X    | X    | X   | node:fs/promises    |
+| open      | X    | X    | X   | node:fs/promises    |
