@@ -22,10 +22,15 @@ will cover most scenarios, this library focuses on the file system operations.
 Example:
 
 ```
-import { exists } from "@cross/fs/stat";
+import { exists, find } from "@cross/fs/stat";
 
+// Check if my/file exists
 console.log(await exists("my/file"));
-// -> true / false
+// false
+
+// Search for package.json recursively, starting from parent folder
+console.log(await find("../", (path) => path.endsWith("package.json")));
+// ["/home/.../package.json","/home/.../.../package.json"]
 ```
 
 Methods:
@@ -34,12 +39,13 @@ Methods:
 | --------- | ---- | ---- | --- | ------------------- |
 | stat      | X    | X    | X   | runtime native      |
 | lstat     | X    | X    | X   | node:fs/promises    |
-| exists    | X    | X    | X   | custom native       |
-| isDir     | X    | X    | X   | custom native       |
-| isFile    | X    | X    | X   | custom native       |
-| isSymlink | X    | X    | X   | custom native       |
-| size      | X    | X    | X   | custom native       |
-| diskusage | X    | X    | X   | custom native       |
+| exists    | X    | X    | X   | custom              |
+| isDir     | X    | X    | X   | custom              |
+| isFile    | X    | X    | X   | custom              |
+| isSymlink | X    | X    | X   | custom              |
+| size      | X    | X    | X   | custom              |
+| find      | X    | X    | X   | custom              |
+| diskusage | X    | X    | X   | custom              |
 
 ### Io
 

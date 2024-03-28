@@ -175,3 +175,4 @@ export { lstat } from "node:fs/promises";
 export * from "./is.ts";
 export * from "./exists.ts";
 export * from "./size.ts";
+export * from "./find.ts";
