@@ -174,3 +174,4 @@ export { statWrap as stat };
 export { lstat } from "node:fs/promises";
 export * from "./is.ts";
 export * from "./exists.ts";
+export * from "./size.ts";

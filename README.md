@@ -38,6 +38,8 @@ Methods:
 | isDir     | X    | X    | X   | custom native       |
 | isFile    | X    | X    | X   | custom native       |
 | isSymlink | X    | X    | X   | custom native       |
+| size      | X    | X    | X   | custom native       |
+| diskusage | X    | X    | X   | custom native       |
 
 ### Io
 
