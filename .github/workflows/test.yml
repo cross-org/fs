@@ -13,9 +13,9 @@ jobs:
   bun_ci:
     uses: cross-org/workflows/.github/workflows/bun-ci.yml@main
     with:
-      jsr_dependencies: "@cross/test @std/assert @cross/runtime @std/path @cross/dir"
+      jsr_dependencies: "@cross/test @std/assert @cross/runtime @std/path @cross/dir @cross/utils"
   node_ci:
     uses: cross-org/workflows/.github/workflows/node-ci.yml@main
     with:
-      jsr_dependencies: "@cross/test @std/assert @cross/runtime @std/path @cross/dir"
+      jsr_dependencies: "@cross/test @std/assert @cross/runtime @std/path @cross/dir @cross/utils"
       test_target: "src/**/*.test.ts"
