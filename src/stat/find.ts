@@ -1,5 +1,6 @@
 import { readdir } from "node:fs/promises";
-import { stat, StatResult } from "./mod.ts";
+import { stat } from "./mod.ts";
+import type { StatResult } from "./mod.ts";
 import { join, resolve } from "@std/path";
 
 /**
@@ -62,6 +63,5 @@ export async function find(
     );
     return results;
   }
-
   return []; // Not a directory or file
 }

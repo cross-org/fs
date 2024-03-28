@@ -1,29 +1,26 @@
 import { assertEquals } from "@std/assert";
 import { test } from "@cross/test";
+import { find } from "./find.ts";
 
-import { isDir, isFile } from "./is.ts";
-
-test("isFile returns true on existing file", async () => {
-  const result = await isFile("./mod.ts");
-  assertEquals(result, true);
+test("find locates find.test.ts file", async () => {
+  const results = await find(".", (path) => path.endsWith("find.test.ts"));
+  assertEquals(results.length > 0, true);
+  assertEquals(
+    results.find((path) => path.includes("/src/stat/find.test.ts"))?.includes(
+      "/src/stat/find.test.ts",
+    ),
+    true,
+  );
 });
 
-test("isFile returns false on non-existiantfile", async () => {
-  const result = await isFile("./mod-nonexistant.ts");
-  assertEquals(result, false);
-});
-
-test("isDir returns false on existing file", async () => {
-  const result = await isDir("./mod.ts");
-  assertEquals(result, false);
-});
-
-test("isFile returns false on existing dir", async () => {
-  const result = await isFile("./src");
-  assertEquals(result, false);
-});
-
-test("isDir returns true on existing dir", async () => {
-  const result = await isDir("./src");
-  assertEquals(result, true);
+test("find doest not locate findnonexistant.test.ts file", async () => {
+  const results = await find(
+    ".",
+    (path) => path.endsWith("findnonexistant.test.ts"),
+  );
+  assertEquals(results.length === 0, true);
+  assertEquals(
+    results.find((path) => path.includes("/src/stat/findnonexistant.test.ts")),
+    undefined,
+  );
 });
