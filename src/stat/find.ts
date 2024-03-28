@@ -1,7 +1,8 @@
 import { readdir } from "node:fs/promises";
 import { stat } from "./mod.ts";
 import type { StatResult } from "./mod.ts";
-import { join, resolve } from "@std/path";
+import { isAbsolute, join, resolve } from "@std/path";
+import { cwd } from "@cross/utils/cwd";
 
 /**
  * Recursively finds files and directories within a specified path, optionally applying advanced filtering.
@@ -33,7 +34,9 @@ export async function find(
   recursive: boolean = true,
 ): Promise<string[]> {
   const statSelf = await stat(inPath);
-  const resolvedPath = resolve(inPath);
+  const resolvedPath = isAbsolute(inPath)
+    ? resolve(inPath)
+    : resolve(cwd(), inPath);
   if (statSelf.isFile || statSelf.isSymlink) {
     if (!fileFilter || fileFilter(resolvedPath, statSelf)) {
       return [resolvedPath]; // Return the file path directly
