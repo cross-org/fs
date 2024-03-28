@@ -176,3 +176,4 @@ export * from "./is.ts";
 export * from "./exists.ts";
 export * from "./size.ts";
 export * from "./find.ts";
+export * from "./hash.ts";

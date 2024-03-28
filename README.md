@@ -31,6 +31,10 @@ console.log(await exists("my/file"));
 // Search for package.json recursively, starting from parent folder
 console.log(await find("../", (path) => path.endsWith("package.json")));
 // ["/home/.../package.json","/home/.../.../package.json"]
+
+// Get the sha256 hash of a file
+console.log(await hash("LICENSE.md", "sha256"));
+// f8c9819eb0c322eef28a0d0948877df068276f487b81326af842d3a20e7c9bbc
 ```
 
 Methods:
@@ -46,6 +50,7 @@ Methods:
 | size      | X    | X    | X   | custom              |
 | find      | X    | X    | X   | custom              |
 | diskusage | X    | X    | X   | custom              |
+| hash      | X    | X    | X   | custom              |
 
 ### Io
 
