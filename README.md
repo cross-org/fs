@@ -21,7 +21,7 @@ will cover most scenarios, this library focuses on the file system operations.
 Example:
 
 ```ts
-import { exists, find } from "@cross/fs/stat";
+import { exists, find, hash, which } from "@cross/fs/stat";
 
 // Check if my/file exists
 console.log(await exists("my/file"));
