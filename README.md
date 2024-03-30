@@ -1,16 +1,15 @@
 # @cross/fs
 
 A cross-runtime utility library offering best practices for file system
-operations in JavaScript and TypeScript.
+operations in JavaScript and TypeScript. Available for Node.js, Deno, Bun, and
+browsers at [jsr.io/@cross/fs](https://jsr.io/@cross/fs).
 
-Available for Node, Deno Bun and Browser at
-[jsr.io/@cross/fs](https://jsr.io/@cross/fs).
-
-The library adheres to node:fs/promises conventions for familiarity, diverging
-only for strategic performance, compatibility advantages or additional
-convenience functions. To ensure cross-runtime reliability, the library
-undergoes rigorous automated testing on Node LTS to current (>= 18), Deno and
-Bun.
+Automated testing across Node.js (>=18), Deno, and Bun ensures cross-runtime
+reliability of all included methods. The library includes useful convenience
+functions such as `which`, `find`, `diskusage`, `size` and `hash`. It uses
+selected parts of `node:fs/promises` as a foundation for core operations,
+strategically diverging to offer performance optimizations or broader
+compatibility.
 
 For cross rutime _path_ operations, [jsr.io/@std/path](https://jsr.io/@std/path)
 will cover most scenarios, this library focuses on the file system operations.
@@ -35,6 +34,10 @@ console.log(await find("../", (path) => path.endsWith("package.json")));
 // Get the sha256 hash of a file
 console.log(await hash("LICENSE.md", "sha256"));
 // f8c9819eb0c322eef28a0d0948877df068276f487b81326af842d3a20e7c9bbc
+
+// Find the installation folder of bun
+console.log(await which("bun"));
+// /home/hexagon/.bun/bin/bun
 ```
 
 Methods:
@@ -51,6 +54,7 @@ Methods:
 | find      | X    | X    | X   | custom              |
 | diskusage | X    | X    | X   | custom              |
 | hash      | X    | X    | X   | custom              |
+| which     | X    | X    | X   | custom              |
 
 ### Io
 
@@ -104,3 +108,5 @@ console.log(await dirpath("config"));
 | watch     | X    | X    | X   | node:fs/promises    |
 | truncate  | X    | X    | X   | node:fs/promises    |
 | open      | X    | X    | X   | node:fs/promises    |
+| access    | X    | X    | X   | node:fs/promises    |
+| constants | X    | X    | X   | node:fs/promises    |

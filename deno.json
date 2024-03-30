@@ -1,6 +1,6 @@
 {
   "name": "@cross/fs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "exports": {
     ".": "./mod.ts",
     "./stat": "./src/stat/mod.ts",
@@ -9,6 +9,7 @@
   },
   "imports": {
     "@cross/dir": "jsr:@cross/dir@^1.1.0",
+    "@cross/env": "jsr:@cross/env@^1.0.0",
     "@cross/runtime": "jsr:@cross/runtime@^1.0.0",
     "@cross/test": "jsr:@cross/test@^0.0.9",
     "@cross/utils": "jsr:@cross/utils@^0.8.2",
