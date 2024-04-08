@@ -15,3 +15,5 @@ export {
 
 export * from "./mktempdir.ts";
 export * from "./tempfile.ts";
+export * from "./chdir.ts";
+export * from "./cwd.ts";

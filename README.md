@@ -92,6 +92,8 @@ console.log(await dirpath("config"));
 | unlink    | X    | X    | X   | node:fs/promises    |
 | dirpath   | X    | X    | X   | @cross/dir          |
 | mkdir     | X    | X    | X   | node:fs/promises    |
+| cwd       | X    | X    | X   | custom              |
+| chdir     | X    | X    | X   | custom              |
 | mktempdir | X    | X    | X   | custom              |
 | rm        | X    | X    | X   | node:fs/promises    |
 | rmdir     | X    | X    | X   | node:fs/promises    |
