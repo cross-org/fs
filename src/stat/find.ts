@@ -2,7 +2,7 @@ import { readdir } from "node:fs/promises";
 import { stat } from "./mod.ts";
 import type { StatResult } from "./mod.ts";
 import { isAbsolute, join, resolve } from "@std/path";
-import { cwd } from "@cross/utils/cwd";
+import { cwd } from "../ops/cwd.ts";
 
 /**
  * Recursively finds files and directories within a specified path, optionally applying advanced filtering.

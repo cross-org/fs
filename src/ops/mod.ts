@@ -11,7 +11,10 @@ export {
   rmdir,
   truncate,
   unlink,
+  watch,
 } from "node:fs/promises";
+
+export type { FSWatcher } from "node:fs";
 
 export * from "./mktempdir.ts";
 export * from "./tempfile.ts";

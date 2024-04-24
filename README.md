@@ -67,6 +67,8 @@ console.log(await readFile("my/file"));
 // -> My file content
 ```
 
+Methods:
+
 | Method     | Deno | Node | Bun | Base implementation |
 | ---------- | ---- | ---- | --- | ------------------- |
 | appendFile | X    | X    | X   | node:fs/promises    |
@@ -86,6 +88,8 @@ console.log(await mktempdir("my-prefix"));
 console.log(await dirpath("config"));
 // -> /home/user/.config
 ```
+
+Methods:
 
 | Method    | Deno | Node | Bun | Base implementation |
 | --------- | ---- | ---- | --- | ------------------- |
@@ -112,3 +116,9 @@ console.log(await dirpath("config"));
 | open      | X    | X    | X   | node:fs/promises    |
 | access    | X    | X    | X   | node:fs/promises    |
 | constants | X    | X    | X   | node:fs/promises    |
+
+Types:
+
+| Method    | Deno | Node | Bun | Base implementation |
+| --------- | ---- | ---- | --- | ------------------- |
+| FSWatcher | X    | X    | X   | node:fs/promises    |
