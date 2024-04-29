@@ -122,3 +122,16 @@ Types:
 | Method    | Deno | Node | Bun | Base implementation |
 | --------- | ---- | ---- | --- | ------------------- |
 | FSWatcher | X    | X    | X   | node:fs/promises    |
+
+Examples:
+
+```typescript
+const watcher = FsWatcher();
+for await (const event of watcher.watch(tempdir)) {
+  if (event.kind === "modify" && filePath == event.paths[0]) {
+    console.log(event);
+    break; // Stop watching after the first creation event
+  }
+}
+watcher.close();
+```
