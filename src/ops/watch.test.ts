@@ -14,7 +14,7 @@ test("FsWatcher watches for file changes", async () => {
     await writeFile(filePath, "Hello");
   }, 1000);
   for await (const event of watcher.watch(tempdir)) {
-    if (event.kind === "modify" && filePath == event.paths[0]) {
+    if (event.kind === "rename" && filePath == event.paths[0]) {
       events.push(event);
       break; // Stop watching after the creation event
     }
@@ -23,6 +23,6 @@ test("FsWatcher watches for file changes", async () => {
   watcher.close();
   await rm(tempdir, { recursive: true });
   assertEquals(events.length, 1);
-  assertEquals(events[0].kind, "modify");
+  assertEquals(events[0].kind, "rename");
   assertEquals(events[0].paths[0], filePath);
 });
