@@ -93,6 +93,7 @@ Methods:
 
 | Method    | Deno | Node | Bun | Base implementation |
 | --------- | ---- | ---- | --- | ------------------- |
+| FsWatcher | X    | X    | X   | custom              |
 | unlink    | X    | X    | X   | node:fs/promises    |
 | dirpath   | X    | X    | X   | @cross/dir          |
 | mkdir     | X    | X    | X   | node:fs/promises    |
@@ -111,7 +112,6 @@ Methods:
 | chmod     | X    | X    | X   | node:fs/promises    |
 | chown     | X    | X    | X   | node:fs/promises    |
 | rename    | X    | X    | X   | node:fs/promises    |
-| watch     | X    | X    | X   | node:fs/promises    |
 | truncate  | X    | X    | X   | node:fs/promises    |
 | open      | X    | X    | X   | node:fs/promises    |
 | access    | X    | X    | X   | node:fs/promises    |
