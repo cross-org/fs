@@ -108,6 +108,7 @@ Methods:
 | unlink    | X    | X    | X   | node:fs/promises    |
 | readdir   | X    | X    | X   | node:fs/promises    |
 | readlink  | X    | X    | X   | node:fs/promises    |
+| realpath  | X    | X    | X   | node:fs/promises    |
 | rename    | X    | X    | X   | node:fs/promises    |
 | chmod     | X    | X    | X   | node:fs/promises    |
 | chown     | X    | X    | X   | node:fs/promises    |
