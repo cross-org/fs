@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 import { CurrentRuntime, Runtime } from "@cross/runtime";
 
 /**
@@ -23,7 +24,6 @@ export function chdir(path: string): void {
     CurrentRuntime === Runtime.Node || CurrentRuntime === Runtime.Bun
   ) {
     //@ts-ignore cross-runtime
-    // deno-lint-ignore no-process-global
     process.chdir(path);
   } else {
     throw new Error("Cannot change directory in the current runtime.");
