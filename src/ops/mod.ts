@@ -6,6 +6,8 @@ export {
   mkdir,
   open,
   readdir,
+  readlink,
+  realpath,
   rename,
   rm,
   rmdir,
