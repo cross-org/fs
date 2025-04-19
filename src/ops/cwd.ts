@@ -19,6 +19,7 @@ export function cwd(): string {
     CurrentRuntime === Runtime.Node || CurrentRuntime === Runtime.Bun
   ) {
     //@ts-ignore cross-runtime
+    // deno-lint-ignore no-process-global
     return process.cwd();
   } else {
     throw new Error(
