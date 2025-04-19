@@ -94,7 +94,7 @@ export function FsWatcher(): Watcher {
           throw new Error("cross/watchFs: Runtime not supported.");
         }
       } catch (err) {
-        if (err.name === "AbortError") {
+        if (err instanceof Error && err.name === "AbortError") {
           /* Ok! */
         } else {
           throw new Error(
