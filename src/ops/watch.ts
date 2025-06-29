@@ -3,10 +3,17 @@ import { watch as nodeWatch } from "node:fs/promises";
 import type { WatchOptions } from "node:fs";
 import { join } from "@std/path";
 
+/**
+ * Options for configuring file system watchers.
+ */
 export interface FileSystemWatcherOptions {
   recursive: boolean;
   signal?: AbortSignal;
 }
+
+/**
+ * Types of file system events that can be detected by watchers.
+ */
 export type FileSystemEventKind =
   | "error"
   | "any"
@@ -15,10 +22,18 @@ export type FileSystemEventKind =
   | "remove"
   | "rename"
   | "other";
+
+/**
+ * Represents a file system event with its type and affected paths.
+ */
 export interface FileSystemEvent {
   kind: FileSystemEventKind;
   paths: (string | undefined)[];
 }
+
+/**
+ * Interface for file system watchers that can monitor directories for changes.
+ */
 export interface Watcher {
   watch(
     path: string,
@@ -26,6 +41,24 @@ export interface Watcher {
   ): AsyncIterable<FileSystemEvent>;
   close(): void;
 }
+
+/**
+ * Creates a cross-runtime compatible file system watcher.
+ *
+ * @returns A watcher instance that can monitor file system changes.
+ *
+ * @example
+ * ```typescript
+ * const watcher = FsWatcher();
+ *
+ * for await (const event of watcher.watch(".")) {
+ *   console.log("File changed:", event.kind, event.paths);
+ * }
+ *
+ * // Don't forget to close the watcher when done
+ * watcher.close();
+ * ```
+ */
 export function FsWatcher(): Watcher {
   let denoWatcher: Deno.FsWatcher | undefined;
   let nodeWatcher: AsyncIterable<unknown>;

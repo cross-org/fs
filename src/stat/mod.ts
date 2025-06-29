@@ -1,10 +1,43 @@
+/**
+ * @cross/fs/stat - File system statistics and information utilities
+ *
+ * This module provides cross-runtime compatible functions for getting file and directory information,
+ * checking file existence, finding files, calculating hashes, and locating executables.
+ *
+ * @example
+ * ```typescript
+ * import { exists, find, hash, which } from "@cross/fs/stat";
+ *
+ * // Check if a file exists
+ * const exists = await exists("package.json");
+ *
+ * // Find all JSON files recursively
+ * const jsonFiles = await find(".", (path) => path.endsWith(".json"));
+ *
+ * // Get SHA256 hash of a file
+ * const fileHash = await hash("README.md", "sha256");
+ *
+ * // Find executable path
+ * const nodePath = await which("node");
+ * ```
+ *
+ * @module
+ */
+
 import { CurrentRuntime, Runtime } from "@cross/runtime";
 
+/**
+ * Options for file system statistics operations.
+ */
 export interface StatOptions {
   /* Request bigInts, Only used with node */
   bigInt: false | undefined;
 }
 
+/**
+ * Result of a file system statistics operation.
+ * Provides information about a file or directory including type, size, timestamps, and permissions.
+ */
 export interface StatResult {
   /** Common Properties */
   isFile: boolean;
@@ -61,6 +94,9 @@ export interface StatResult {
   isSocket: boolean | null;
 }
 
+/**
+ * Error thrown when a file or directory is not found during file system operations.
+ */
 export class NotFoundError extends Error {
   constructor(message: string) {
     super(message);
