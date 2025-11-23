@@ -1,4 +1,4 @@
-import { readdir } from "node:fs/promises";
+import { readdir } from "../ops/mod.ts";
 import { stat } from "./mod.ts";
 import type { StatResult } from "./mod.ts";
 import { isAbsolute, join, resolve } from "@std/path";
