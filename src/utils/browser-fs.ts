@@ -89,14 +89,22 @@ export async function configureBrowserFS(config: Parameters<typeof import("@zenf
     throw new Error("Browser filesystem can only be configured in browser runtime");
   }
 
-  // Wait for any ongoing initialization
+  // If initialization is already in progress or complete, wait for it
   if (initializationPromise) {
     await initializationPromise;
+    // Reset to allow reconfiguration
+    zenFSInitialized = false;
+    initializationPromise = null;
   }
 
-  const { configure, fs } = await import("@zenfs/core");
-  await configure(config);
-  zenFS = fs;
-  zenFSInitialized = true;
-  initializationPromise = Promise.resolve(fs);
+  // Set up new initialization promise
+  initializationPromise = (async () => {
+    const { configure, fs } = await import("@zenfs/core");
+    await configure(config);
+    zenFS = fs;
+    zenFSInitialized = true;
+    return fs;
+  })();
+  
+  await initializationPromise;
 }

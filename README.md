@@ -47,13 +47,14 @@ import { configureBrowserFS } from "@cross/fs";
 
 // Import ZenFS backends you want to use
 // Note: Install @zenfs/dom separately for IndexedDB and WebAccess backends
-const { IndexedDB } = await import("@zenfs/dom");
+import { configureBrowserFS } from "@cross/fs";
+const { IndexedDB, InMemory } = await import("@zenfs/dom");
 
 // Configure before using filesystem operations
 await configureBrowserFS({
   mounts: {
-    '/storage': IndexedDB,  // Persistent storage
-    '/tmp': { backend: 'InMemory' }  // Temporary in-memory storage
+    '/storage': { backend: IndexedDB },  // Persistent storage
+    '/tmp': { backend: InMemory }        // Temporary in-memory storage
   }
 });
 
@@ -129,7 +130,6 @@ Methods:
 
 | Method     | Deno | Node | Bun | Browser | Base implementation |
 | ---------- | ---- | ---- | --- | ------- | ------------------- |
-| appendFile | X    | X    | X   | -       | node:fs/promises    |
 | readFile   | X    | X    | X   | X       | node:fs/promises    |
 | writeFile  | X    | X    | X   | X       | node:fs/promises    |
 

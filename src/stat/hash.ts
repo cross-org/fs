@@ -3,11 +3,11 @@ import { readFile } from "../io/mod.ts";
 
 /**
  * Calculates the hash of a file.
- * - Uses node:crypto in Node.js/Deno/Bun
- * - Uses Web Crypto API in browsers
+ * - Uses node:crypto in Node.js/Deno/Bun (supports sha256, sha1, md5, etc.)
+ * - Uses Web Crypto API in browsers (supports sha256, sha1, sha384, sha512)
  *
  * @param filePath - The path to the file.
- * @param algorithm - The algorithm to use (sha256, sha1, md5, etc.)
+ * @param algorithm - The algorithm to use. In browsers, only sha256, sha1, sha384, sha512 are supported.
  * @returns The hash as a hexadecimal string.
  */
 export async function hash(
