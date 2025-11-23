@@ -11,12 +11,18 @@ import { CurrentRuntime, Runtime } from "@cross/runtime";
 
 let zenFS: typeof import("@zenfs/core").fs | null = null;
 let zenFSInitialized = false;
+let initializationPromise: Promise<typeof import("@zenfs/core").fs> | null = null;
 
 /**
  * Initializes ZenFS for browser environment with default configuration
  * Uses InMemory backend by default for maximum compatibility
  */
 async function initializeZenFS() {
+  // Return existing initialization if in progress or completed
+  if (initializationPromise) {
+    return initializationPromise;
+  }
+  
   if (zenFSInitialized) {
     return zenFS!;
   }
@@ -25,22 +31,27 @@ async function initializeZenFS() {
     throw new Error("ZenFS should only be initialized in browser runtime");
   }
 
-  try {
-    const { configure, InMemory, fs } = await import("@zenfs/core");
-    
-    // Configure with in-memory filesystem by default
-    await configure({
-      mounts: {
-        '/': InMemory,
-      }
-    });
-    
-    zenFS = fs;
-    zenFSInitialized = true;
-    return zenFS;
-  } catch (error) {
-    throw new Error(`Failed to initialize ZenFS: ${error}`);
-  }
+  initializationPromise = (async () => {
+    try {
+      const { configure, InMemory, fs } = await import("@zenfs/core");
+      
+      // Configure with in-memory filesystem by default
+      await configure({
+        mounts: {
+          '/': { backend: InMemory },
+        }
+      });
+      
+      zenFS = fs;
+      zenFSInitialized = true;
+      return zenFS;
+    } catch (error) {
+      initializationPromise = null; // Reset on failure
+      throw new Error(`Failed to initialize ZenFS: ${error}`);
+    }
+  })();
+  
+  return initializationPromise;
 }
 
 /**
@@ -78,8 +89,14 @@ export async function configureBrowserFS(config: Parameters<typeof import("@zenf
     throw new Error("Browser filesystem can only be configured in browser runtime");
   }
 
+  // Wait for any ongoing initialization
+  if (initializationPromise) {
+    await initializationPromise;
+  }
+
   const { configure, fs } = await import("@zenfs/core");
   await configure(config);
   zenFS = fs;
   zenFSInitialized = true;
+  initializationPromise = Promise.resolve(fs);
 }

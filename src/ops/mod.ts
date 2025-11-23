@@ -159,14 +159,84 @@ export async function cp(source: string, destination: string, options?: { recurs
 
 /**
  * Operations that require platform-specific implementations or are not supported in browsers.
- * These are only exported for Node.js, Deno, and Bun runtimes.
+ * These throw errors when called in browser environments.
  */
-export {
-  chmod,
-  chown,
-  link,
-  open,
-  readlink,
-  realpath,
-  truncate,
-} from "node:fs/promises";
+
+/**
+ * Changes file permissions (not supported in browsers).
+ */
+export async function chmod(path: string, mode: number): Promise<void> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("chmod is not supported in browser environments");
+  }
+  const { chmod: nodeChmod } = await import("node:fs/promises");
+  await nodeChmod(path, mode);
+}
+
+/**
+ * Changes file ownership (not supported in browsers).
+ */
+export async function chown(path: string, uid: number, gid: number): Promise<void> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("chown is not supported in browser environments");
+  }
+  const { chown: nodeChown } = await import("node:fs/promises");
+  await nodeChown(path, uid, gid);
+}
+
+/**
+ * Creates a hard link (not supported in browsers).
+ */
+export async function link(existingPath: string, newPath: string): Promise<void> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("link is not supported in browser environments");
+  }
+  const { link: nodeLink } = await import("node:fs/promises");
+  await nodeLink(existingPath, newPath);
+}
+
+/**
+ * Opens a file (not supported in browsers, use readFile/writeFile instead).
+ */
+export async function open(path: string, flags?: string | number, mode?: number): Promise<any> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("open is not supported in browser environments - use readFile/writeFile instead");
+  }
+  const { open: nodeOpen } = await import("node:fs/promises");
+  return await nodeOpen(path, flags, mode);
+}
+
+/**
+ * Reads the value of a symbolic link (not supported in browsers).
+ */
+export async function readlink(path: string, options?: { encoding?: BufferEncoding | null }): Promise<string> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("readlink is not supported in browser environments");
+  }
+  const { readlink: nodeReadlink } = await import("node:fs/promises");
+  //@ts-ignore Cross-runtime typing
+  return await nodeReadlink(path, options);
+}
+
+/**
+ * Resolves to the canonical absolute pathname (not supported in browsers).
+ */
+export async function realpath(path: string, options?: { encoding?: BufferEncoding | null }): Promise<string> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("realpath is not supported in browser environments");
+  }
+  const { realpath: nodeRealpath } = await import("node:fs/promises");
+  //@ts-ignore Cross-runtime typing
+  return await nodeRealpath(path, options);
+}
+
+/**
+ * Truncates a file to a specified length (not supported in browsers).
+ */
+export async function truncate(path: string, len?: number): Promise<void> {
+  if (CurrentRuntime === Runtime.Browser) {
+    throw new Error("truncate is not supported in browser environments");
+  }
+  const { truncate: nodeTruncate } = await import("node:fs/promises");
+  await nodeTruncate(path, len);
+}

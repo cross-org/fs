@@ -36,7 +36,7 @@ export async function hash(
   } else {
     // Use node:crypto in Node.js/Deno/Bun
     const nodeCrypto = await import("node:crypto");
-    const hash = nodeCrypto.default.createHash(algorithm);
+    const hash = nodeCrypto.createHash(algorithm);
     hash.update(fileData);
     return hash.digest("hex");
   }
