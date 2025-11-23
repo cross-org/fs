@@ -140,8 +140,21 @@ async function statWrap(
           throw err;
         }
       }
-    case Runtime.Browser: // Add browser case for clarity
-      throw new Error("File system access not supported in the browser");
+    case Runtime.Browser:
+      try {
+        const { getBrowserFS } = await import("../utils/browser-fs.ts");
+        const fs = await getBrowserFS();
+        //@ts-ignore ZenFS typing
+        const stats = await fs.promises.stat(path);
+        return mapNodeStats(stats, options?.bigInt === undefined ? true : false);
+      } catch (err) {
+        //@ts-ignore Cross
+        if (err.code === "ENOENT") {
+          throw new NotFoundError(`File not found: ${path}`);
+        } else {
+          throw err;
+        }
+      }
 
     default:
       throw new Error("Unsupported Runtime");
@@ -207,7 +220,47 @@ function mapDenoStats(stats: Deno.FileInfo): StatResult {
 }
 
 export { statWrap as stat };
-export { access, constants, lstat } from "node:fs/promises";
+
+/**
+ * Tests a user's permissions for the file or directory specified by path.
+ */
+export async function access(path: string, mode?: number): Promise<void> {
+  if (CurrentRuntime === Runtime.Browser) {
+    const { getBrowserFS } = await import("../utils/browser-fs.ts");
+    const fs = await getBrowserFS();
+    //@ts-ignore ZenFS typing
+    await fs.promises.access(path, mode);
+  } else {
+    const { access: nodeAccess } = await import("node:fs/promises");
+    await nodeAccess(path, mode);
+  }
+}
+
+/**
+ * Gets information about a symbolic link.
+ */
+export async function lstat(
+  path: string,
+  options?: StatOptions,
+): Promise<StatResult> {
+  if (CurrentRuntime === Runtime.Browser) {
+    const { getBrowserFS } = await import("../utils/browser-fs.ts");
+    const fs = await getBrowserFS();
+    //@ts-ignore ZenFS typing
+    const stats = await fs.promises.lstat(path);
+    return mapNodeStats(stats, options?.bigInt === undefined ? true : false);
+  } else {
+    const { lstat: nodeLstat } = await import("node:fs/promises");
+    //@ts-ignore Cross
+    const stats = await nodeLstat(path, options);
+    return mapNodeStats(stats, options?.bigInt === undefined ? true : false);
+  }
+}
+
+// Re-export constants from node:fs/promises for non-browser environments
+// For browser, these will need to be imported from ZenFS if needed
+export { constants } from "node:fs/promises";
+
 export * from "./is.ts";
 export * from "./exists.ts";
 export * from "./size.ts";
