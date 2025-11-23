@@ -47,7 +47,6 @@ import { configureBrowserFS } from "@cross/fs";
 
 // Import ZenFS backends you want to use
 // Note: Install @zenfs/dom separately for IndexedDB and WebAccess backends
-import { configureBrowserFS } from "@cross/fs";
 const { IndexedDB, InMemory } = await import("@zenfs/dom");
 
 // Configure before using filesystem operations
