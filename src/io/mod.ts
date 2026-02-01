@@ -6,16 +6,19 @@
  *
  * @example
  * ```typescript
- * import { readFile, writeFile } from "@cross/fs/io";
+ * import { appendFile, readFile, writeFile } from "@cross/fs/io";
  *
  * // Read a file
  * const content = await readFile("config.json", "utf8");
  *
  * // Write a file
  * await writeFile("output.txt", "Hello, World!");
+ *
+ * // Append to a file
+ * await appendFile("output.txt", "\nMore content");
  * ```
  *
  * @module
  */
 
-export { readFile, writeFile } from "node:fs/promises";
+export { appendFile, readFile, writeFile } from "node:fs/promises";
