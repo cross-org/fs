@@ -1,7 +1,7 @@
 import { assertEquals } from "@std/assert";
 import { test } from "@cross/test";
 import { writeFile } from "../io/mod.ts";
-import { mktempdir, mkdir, rm } from "../ops/mod.ts";
+import { mkdir, mktempdir, rm } from "../ops/mod.ts";
 import { diskusage, size } from "./size.ts";
 
 test("size(dir, false) includes direct children only, size(dir, true) includes all descendants", async () => {

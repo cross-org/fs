@@ -26,9 +26,7 @@ export async function diskusage(
       const childUsage = await Promise.all(
         files.map((file) => {
           const path = join(inPath, file.name);
-          return stat(path).then((s) =>
-            Math.max(s.blksize ?? 0, s.size)
-          );
+          return stat(path).then((s) => Math.max(s.blksize ?? 0, s.size));
         }),
       );
       return actualSize + childUsage.reduce((a, b) => a + b, 0);
