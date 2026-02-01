@@ -46,6 +46,7 @@ export {
 
 export type { FSWatcher } from "node:fs";
 
+export * from "./dir.ts";
 export * from "./mktempdir.ts";
 export * from "./tempfile.ts";
 export * from "./chdir.ts";
